@@ -33,25 +33,28 @@ namespace WebAPINetCore.Controllers
         {
 
             ///TODO: Post new item
-
-            return Ok();
+            TodoService todoService = new TodoService();
+            return todoService.CreateTodoItem(item);
         }
 
         [HttpPut]
         public IActionResult Put(TodoItem item)
         {
-            TodoService todoService = new TodoService();            
+            /*TodoService todoService = new TodoService();            
             var result = todoService.GetAllTodoItem().Where(m => m.id == item.id)
                 .Select(c => { 
                     c.summary = item.summary; 
                     c.temperatureC = item.temperatureC; 
                     c.temperatureF = item.temperatureF; 
                     return c; 
-            });
+            });*/
 
             ///TODO: Get a list with new result?
 
-            return Ok(result);
+            //return Ok(result);
+
+            TodoService todoService = new TodoService();
+            return todoService.UpdateTodoItem(item);
         }
 
         [HttpDelete("{id}")]
@@ -63,5 +66,6 @@ namespace WebAPINetCore.Controllers
             result.RemoveAll(m => m.id == setItemToRemove.id);
             return Ok(result);
         }
+        
     }
 }
